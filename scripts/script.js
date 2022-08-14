@@ -49,7 +49,7 @@ function game(){
     let playerSelection = '';
     let computerSelection = '';
     let message = '', winner = '';
-    let playerScore = 0, computerScore = 0;
+    let playerScore = 0, computerScore = 0, inputErrors = 0;
 
     for(let i = 0; i < 5; i++){
         // get the random computer choice
@@ -77,11 +77,15 @@ function game(){
         } else {
             // user entered the wrong choice
             console.log('Wrong choice. Please try again!');
+            inputErrors++;
         }
     }
 
     // determine the winner of the game
-    displayFinalScore(playerScore, computerScore); 
+    // if a user entered the wrong choice in each round (5 times)
+    // don't display the score
+    if(inputErrors !== 5)
+        displayFinalScore(playerScore, computerScore);
 }
 
 // look inside the string returned by playRound() 
