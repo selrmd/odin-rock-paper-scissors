@@ -68,19 +68,13 @@ function game(){
                 computerScore++;
             }
 
-            console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
+            console.log(`Player:${playerScore} || Computer:${computerScore}`);
         } else {
             console.log('Wrong choice. Please try again!');
         }
     }
 
-    if(playerScore > computerScore){
-        console.log(`Player won! ${playerScore} to ${computerScore}`);
-    } else if(playerScore < computerScore) {
-        console.log(`Computer won! ${computerScore} to ${playerScore}`);
-    } else {
-        console.log(`It's a tie!! ${playerScore} to ${computerScore}`);
-    }
+    displayFinalScore(playerScore, computerScore); 
 }
 
 function getWinner(message){
@@ -90,6 +84,17 @@ function getWinner(message){
         return 'winner';
     else if (str.includes('lose'))
         return 'loser';
+}
+
+function displayFinalScore(playerScore, computerScore){
+
+    if(playerScore > computerScore){
+        console.log(`Player won! ${playerScore} to ${computerScore}`);
+    } else if(playerScore < computerScore) {
+        console.log(`Computer won! ${computerScore} to ${playerScore}`);
+    } else {
+        console.log(`It's a tie!! ${playerScore} to ${computerScore}`);
+    }
 }
 
 game();
