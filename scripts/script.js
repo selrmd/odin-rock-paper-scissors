@@ -48,14 +48,48 @@ function playRound(playerSelection, computerSelection){
 function game(){
     let playerSelection = '';
     let computerSelection = '';
+    let message = '', winner = '';
+    let playerScore = 0, computerScore = 0;
 
     for(let i = 0; i < 5; i++){
-        playerSelection = prompt('Rock, Paper or Scissors??');
         computerSelection = getComputerChoice();
 
-        alert(playRound(playerSelection, computerSelection));
+        playerSelection = prompt('Rock, Paper or Scissors??').toLowerCase();
+
+        if(playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'){
+            message = playRound(playerSelection, computerSelection);
+            winner = getWinner(message);
+
+            console.log(message);
+
+            if(winner === 'winner'){
+                playerScore ++;
+            } else if (winner === 'loser') {
+                computerScore++;
+            }
+
+            console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
+        } else {
+            console.log('Wrong choice. Please try again!');
+        }
     }
 
+    if(playerScore > computerScore){
+        console.log(`Player won! ${playerScore} to ${computerScore}`);
+    } else if(playerScore < computerScore) {
+        console.log(`Computer won! ${computerScore} to ${playerScore}`);
+    } else {
+        console.log(`It's a tie!! ${playerScore} to ${computerScore}`);
+    }
+}
+
+function getWinner(message){
+    let str = message.toLowerCase();
+
+    if(str.includes('win'))
+        return 'winner';
+    else if (str.includes('lose'))
+        return 'loser';
 }
 
 game();
