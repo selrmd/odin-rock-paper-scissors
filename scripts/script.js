@@ -43,3 +43,19 @@ function playRound(playerSelection, computerSelection){
     else
         return 'A Tie!';
 }
+
+// play a game of 5 rounds
+function game(){
+    let playerSelection = '';
+    let computerSelection = '';
+
+    for(let i = 0; i < 5; i++){
+        playerSelection = prompt('Rock, Paper or Scissors??');
+        computerSelection = getComputerChoice();
+
+        alert(playRound(playerSelection, computerSelection));
+    }
+
+}
+
+game();
