@@ -23,3 +23,23 @@ function getComputerChoice(){
     // return the choice
     return choice;
 }
+
+// play one round of the game
+function playRound(playerSelection, computerSelection){
+    let playerChoice = playerSelection.toLowerCase();
+
+    if(playerChoice === 'scissors' && computerSelection === 'paper')
+        return 'You Win! Scissors beats Paper';
+    else if(playerChoice === 'paper' && computerSelection === 'scissors')
+        return 'You Lose! Scissors beats Paper';
+    else if(playerChoice === 'paper' && computerSelection === 'rock')
+        return 'You Win! Paper beats Rock';
+    else if(playerChoice === 'rock' && computerSelection === 'paper')
+        return 'You Lose! Paper beats Rock';
+    else if(playerChoice === 'rock' && computerSelection === 'scissors')
+        return 'You Win! Rock beats Scissors';
+    else if(playerChoice === 'scissors' && computerSelection === 'rock')
+        return 'You Lose! Rock beats Scissors';
+    else
+        return 'A Tie!';
+}
