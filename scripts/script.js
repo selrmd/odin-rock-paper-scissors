@@ -52,31 +52,40 @@ function game(){
     let playerScore = 0, computerScore = 0;
 
     for(let i = 0; i < 5; i++){
+        // get the random computer choice
         computerSelection = getComputerChoice();
 
+        // get user choice
         playerSelection = prompt('Rock, Paper or Scissors??').toLowerCase();
 
+        // user entered the right choice
         if(playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'){
+            // display winner of this round
             message = playRound(playerSelection, computerSelection);
-            winner = getWinner(message);
-
             console.log(message);
 
+            // keep a score for each round
+            winner = getWinner(message);
             if(winner === 'winner'){
                 playerScore ++;
             } else if (winner === 'loser') {
                 computerScore++;
             }
 
+            // display the current score
             console.log(`Player:${playerScore} || Computer:${computerScore}`);
         } else {
+            // user entered the wrong choice
             console.log('Wrong choice. Please try again!');
         }
     }
 
+    // determine the winner of the game
     displayFinalScore(playerScore, computerScore); 
 }
 
+// look inside the string returned by playRound() 
+// and see if player won or lost
 function getWinner(message){
     let str = message.toLowerCase();
 
@@ -87,7 +96,7 @@ function getWinner(message){
 }
 
 function displayFinalScore(playerScore, computerScore){
-
+    // compare the score and display the winner
     if(playerScore > computerScore){
         console.log(`Player won! ${playerScore} to ${computerScore}`);
     } else if(playerScore < computerScore) {
@@ -97,4 +106,5 @@ function displayFinalScore(playerScore, computerScore){
     }
 }
 
+// play a game of 5 rounds
 game();
