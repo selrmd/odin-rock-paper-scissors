@@ -1,3 +1,16 @@
+// get player selection from buttons
+let gameBtns = Array.from(document.getElementsByTagName("button"));
+let playerBtnChoice = '', computerChoice = '';
+
+// For each button, listen for player choice and play a round
+gameBtns.forEach(element => 
+    element.addEventListener('click', e => {
+        playerBtnChoice = e.target.innerText;
+        computerChoice = getComputerChoice();
+
+        console.log(playRound(playerBtnChoice, computerChoice));
+}));
+
 // get a random choice for computer
 function getComputerChoice(){
     let choice = '';
@@ -109,6 +122,3 @@ function displayFinalScore(playerScore, computerScore){
         console.log(`It's a tie!! ${playerScore} to ${computerScore}`);
     }
 }
-
-// play a game of 5 rounds
-game();
