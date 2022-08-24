@@ -1,7 +1,4 @@
 function playGame(){
-    // hide the reset button until a game is played
-    document.getElementById('reset').style.display = 'none';
-
     // get player selection from buttons
     let gameBtns = Array.from(document.getElementsByTagName("button"));
     let playerBtnChoice = '', computerChoice = '';
@@ -17,7 +14,6 @@ function playGame(){
             playRound(playerBtnChoice, computerChoice);
     }));
 }
-
 
 // get a random choice for computer
 function getComputerChoice(){
@@ -110,6 +106,8 @@ function calculateScore(){
     if(playerScore >= 5 || computerScore >= 5)
     {
         displayScore(playerScore, computerScore);
+        document.getElementsByTagName('h1')[0].innerText = 'Wanna play again??';
+        document.getElementById('rps-img').style.display = 'block';
         resetGame();
     }
 }
@@ -132,22 +130,22 @@ function displayScore(player, cpu){
 
 // reset game once a winner is announced
 function resetGame(){
-    let gameBtns = Array.from(document.getElementsByTagName("button"));
-    gameBtns.forEach(button => button.style.display = 'none');
-
+    document.getElementById("buttons-container").style.display = 'none';
     document.getElementById('result').style.display = 'none';
 
     let resetBtn = document.getElementById('reset');
     resetBtn.style.display = 'initial';
 
     resetBtn.addEventListener('click', () => {
+        document.getElementsByTagName('h1')[0].innerText = 'Let\'s play a round of Rock, Paper, Scissors';
         document.getElementById('result').innerText = '';
         document.getElementById('player').innerText = '0';
         document.getElementById('cpu').innerText = '0';
         document.getElementById('winner').innerText = '';
 
-        gameBtns.forEach(button => button.style.display = 'initial');
+        document.getElementById("buttons-container").style.display = 'flex';;
         document.getElementById('result').style.display = 'block';
+        document.getElementById('rps-img').style.display = 'none';
         resetBtn.style.display = 'none';
     });
 }

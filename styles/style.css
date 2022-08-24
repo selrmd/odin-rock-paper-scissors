@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    background-color: #19647E;
+
+    font-family: 'Kalam', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100px;
+    background-color: #37392E;
+}
+
+h1 {
+    color: #ecf0f1;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#buttons-container button {
+    justify-content: center;
+    margin: 8px;
+}
+
+.choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 200px;
+
+    border-radius: 16px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ecf0f1;
+}
+
+#rps-img {
+    display: none;
+    margin: 40px auto;
+}
+
+#score-container {
+    display: flex;
+    justify-content: center;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+
+    min-width: 200px;
+    margin-right: 30px;
+    padding: 0 10px;
+    
+    background-color: #ecf0f1;
+    border-radius: 5px;
+
+    color: #37392E;
+    font-size: 24px;
+}
+
+#player,
+#cpu {
+    margin-left: 20px;
+}
+
+#result,
+#winner {
+    height: 50px;
+    margin: 0 auto;
+    padding: 30px 0;
+    font-size: 32px;
+    color: #ecf0f1;
+}
+
+button {
+    min-width: 150px;
+    min-height: 40px;
+    padding: 0 12px;
+
+    border-radius: 8px;
+    border-style: none;
+
+    background-color: #37392E;
+    color: #ecf0f1;
+
+    font-size: 22px;
+    font-family: 'Kalam', sans-serif;
+}
+
+#reset{
+    display: none;
+}
+
+#final-result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
