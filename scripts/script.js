@@ -1,17 +1,23 @@
-// get player selection from buttons
-let gameBtns = Array.from(document.getElementsByTagName("button"));
-let playerBtnChoice = '', computerChoice = '';
+function playGame(){
+    // hide the reset button until a game is played
+    document.getElementById('reset').style.display = 'none';
 
-// For each button, listen for player choice and play a round
-gameBtns.forEach(element => 
-    element.addEventListener('click', e => {
-        document.getElementById('result').innerText = '';
+    // get player selection from buttons
+    let gameBtns = Array.from(document.getElementsByTagName("button"));
+    let playerBtnChoice = '', computerChoice = '';
 
-        playerBtnChoice = e.target.innerText;
-        computerChoice = getComputerChoice();
+    // For each button, listen for player choice and play a round
+    gameBtns.forEach(element => 
+        element.addEventListener('click', e => {
+            document.getElementById('result').innerText = '';
 
-        console.log(playRound(playerBtnChoice, computerChoice));
-}));
+            playerBtnChoice = e.target.innerText;
+            computerChoice = getComputerChoice();
+
+            playRound(playerBtnChoice, computerChoice);
+    }));
+}
+
 
 // get a random choice for computer
 function getComputerChoice(){
@@ -72,70 +78,79 @@ function playRound(playerSelection, computerSelection){
         textResult = document.createTextNode('A Tie!');
         document.getElementById('result').appendChild(textResult);
     }
+
+    calculateScore();
 }
 
-// play a game of 5 rounds
-function game(){
-    let playerSelection = '';
-    let computerSelection = '';
-    let message = '', winner = '';
-    let playerScore = 0, computerScore = 0, inputErrors = 0;
+// calculate the score, get the winner
+function calculateScore(){
+    let currentWinner = document.getElementById('result').innerText.toLowerCase();
 
-    for(let i = 0; i < 5; i++){
-        // get the random computer choice
-        computerSelection = getComputerChoice();
+    let playerScore = parseInt(document.getElementById('player').innerText);
+    let computerScore = parseInt(document.getElementById('cpu').innerText);
 
-        // get user choice
-        playerSelection = prompt('Rock, Paper or Scissors??').toLowerCase();
+    // increment the score based on playedRound() string
+    if(currentWinner.includes('win'))
+        playerScore += 1;
 
-        // user entered the right choice
-        if(playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'){
-            // display winner of this round
-            message = playRound(playerSelection, computerSelection);
-            console.log(message);
+    else if(currentWinner.includes('lose'))
+        computerScore += 1;
 
-            // keep a score for each round
-            winner = getWinner(message);
-            if(winner === 'winner'){
-                playerScore ++;
-            } else if (winner === 'loser') {
-                computerScore++;
-            }
-
-            // display the current score
-            console.log(`Player:${playerScore} || Computer:${computerScore}`);
-        } else {
-            // user entered the wrong choice
-            console.log('Wrong choice. Please try again!');
-            inputErrors++;
-        }
+    else if(currentWinner.includes('tie')){
+        playerScore += 1;
+        computerScore += 1;
     }
 
-    // determine the winner of the game
-    // if a user entered the wrong choice in each round (5 times)
-    // don't display the score
-    if(inputErrors !== 5)
-        displayFinalScore(playerScore, computerScore);
+    // display score
+    document.getElementById('player').innerText = playerScore;
+    document.getElementById('cpu').innerText = computerScore;
+
+    // when one player reaches a score of 5
+    // stop the game and reset it
+    if(playerScore >= 5 || computerScore >= 5)
+    {
+        displayScore(playerScore, computerScore);
+        resetGame();
+    }
 }
 
-// look inside the string returned by playRound() 
-// and see if player won or lost
-function getWinner(message){
-    let str = message.toLowerCase();
+// display the score
+function displayScore(player, cpu){
+    let finalScore = '';
 
-    if(str.includes('win'))
-        return 'winner';
-    else if (str.includes('lose'))
-        return 'loser';
-}
-
-function displayFinalScore(playerScore, computerScore){
-    // compare the score and display the winner
-    if(playerScore > computerScore){
-        console.log(`Player won! ${playerScore} to ${computerScore}`);
-    } else if(playerScore < computerScore) {
-        console.log(`Computer won! ${computerScore} to ${playerScore}`);
+    if(player > cpu){
+        finalScore = document.createTextNode(`Player won! ${player} to ${cpu}`);
+        document.getElementById('winner').appendChild(finalScore) ;
+    } else if(player < cpu){
+        finalScore = document.createTextNode(`Computer won! ${cpu} to ${player}`);
+        document.getElementById('winner').appendChild(finalScore) ;
     } else {
-        console.log(`It's a tie!! ${playerScore} to ${computerScore}`);
+        finalScore = document.createTextNode(`It's a tie!! ${player} each!`);
+        document.getElementById('winner').appendChild(finalScore) ;
     }
 }
+
+// reset game once a winner is announced
+function resetGame(){
+    let gameBtns = Array.from(document.getElementsByTagName("button"));
+    gameBtns.forEach(button => button.style.display = 'none');
+
+    document.getElementById('result').style.display = 'none';
+
+    let resetBtn = document.getElementById('reset');
+    resetBtn.style.display = 'initial';
+
+    resetBtn.addEventListener('click', () => {
+        document.getElementById('result').innerText = '';
+        document.getElementById('player').innerText = '0';
+        document.getElementById('cpu').innerText = '0';
+        document.getElementById('winner').innerText = '';
+
+        gameBtns.forEach(button => button.style.display = 'initial');
+        document.getElementById('result').style.display = 'block';
+        resetBtn.style.display = 'none';
+    });
+}
+
+// start playing the game
+playGame();
