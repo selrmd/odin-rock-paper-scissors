@@ -5,6 +5,8 @@ let playerBtnChoice = '', computerChoice = '';
 // For each button, listen for player choice and play a round
 gameBtns.forEach(element => 
     element.addEventListener('click', e => {
+        document.getElementById('result').innerText = '';
+
         playerBtnChoice = e.target.innerText;
         computerChoice = getComputerChoice();
 
@@ -40,21 +42,36 @@ function getComputerChoice(){
 // play one round of the game
 function playRound(playerSelection, computerSelection){
     let playerChoice = playerSelection.toLowerCase();
+    let textResult;
 
-    if(playerChoice === 'scissors' && computerSelection === 'paper')
-        return 'You Win! Scissors beats Paper';
-    else if(playerChoice === 'paper' && computerSelection === 'scissors')
-        return 'You Lose! Scissors beats Paper';
-    else if(playerChoice === 'paper' && computerSelection === 'rock')
-        return 'You Win! Paper beats Rock';
-    else if(playerChoice === 'rock' && computerSelection === 'paper')
-        return 'You Lose! Paper beats Rock';
-    else if(playerChoice === 'rock' && computerSelection === 'scissors')
-        return 'You Win! Rock beats Scissors';
-    else if(playerChoice === 'scissors' && computerSelection === 'rock')
-        return 'You Lose! Rock beats Scissors';
-    else
-        return 'A Tie!';
+    if(playerChoice === 'scissors' && computerSelection === 'paper'){
+        textResult = document.createTextNode('You Win! Scissors beats Paper');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else if(playerChoice === 'paper' && computerSelection === 'scissors'){
+        textResult = document.createTextNode('You Lose! Scissors beats Paper');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else if(playerChoice === 'paper' && computerSelection === 'rock'){
+        textResult = document.createTextNode('You Win! Paper beats Rock');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else if(playerChoice === 'rock' && computerSelection === 'paper'){
+        textResult = document.createTextNode('You Lose! Paper beats Rock');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else if(playerChoice === 'rock' && computerSelection === 'scissors'){
+        textResult = document.createTextNode('You Win! Rock beats Scissors');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else if(playerChoice === 'scissors' && computerSelection === 'rock'){
+        textResult = document.createTextNode('You Lose! Rock beats Scissors');
+        document.getElementById('result').appendChild(textResult);
+    }
+    else{
+        textResult = document.createTextNode('A Tie!');
+        document.getElementById('result').appendChild(textResult);
+    }
 }
 
 // play a game of 5 rounds
