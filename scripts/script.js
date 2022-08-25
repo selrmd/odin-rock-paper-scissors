@@ -1,16 +1,17 @@
 function playGame(){
     // get player selection from buttons
-    let gameBtns = Array.from(document.getElementsByTagName("button"));
+    let gameBtns = Array.from(document.getElementsByTagName('button'));
     let playerBtnChoice = '', computerChoice = '';
 
-    // For each button, listen for player choice and play a round
-    gameBtns.forEach(element => 
-        element.addEventListener('click', e => {
+    // For each button, listen for player choice
+    gameBtns.forEach(button => 
+        button.addEventListener('click', e => {
             document.getElementById('result').innerText = '';
 
             playerBtnChoice = e.target.innerText;
             computerChoice = getComputerChoice();
 
+            // play one round
             playRound(playerBtnChoice, computerChoice);
     }));
 }
@@ -44,35 +45,27 @@ function getComputerChoice(){
 // play one round of the game
 function playRound(playerSelection, computerSelection){
     let playerChoice = playerSelection.toLowerCase();
-    let textResult;
 
     if(playerChoice === 'scissors' && computerSelection === 'paper'){
-        textResult = document.createTextNode('You Win! Scissors beats Paper');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Win! Scissors beats Paper';
     }
     else if(playerChoice === 'paper' && computerSelection === 'scissors'){
-        textResult = document.createTextNode('You Lose! Scissors beats Paper');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Lose! Scissors beats Paper';
     }
     else if(playerChoice === 'paper' && computerSelection === 'rock'){
-        textResult = document.createTextNode('You Win! Paper beats Rock');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Win! Paper beats Rock';
     }
     else if(playerChoice === 'rock' && computerSelection === 'paper'){
-        textResult = document.createTextNode('You Lose! Paper beats Rock');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Lose! Paper beats Rock';
     }
     else if(playerChoice === 'rock' && computerSelection === 'scissors'){
-        textResult = document.createTextNode('You Win! Rock beats Scissors');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Win! Rock beats Scissors';
     }
     else if(playerChoice === 'scissors' && computerSelection === 'rock'){
-        textResult = document.createTextNode('You Lose! Rock beats Scissors');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'You Lose! Rock beats Scissors'
     }
     else{
-        textResult = document.createTextNode('A Tie!');
-        document.getElementById('result').appendChild(textResult);
+        document.getElementById('result').innerText = 'A Tie!';
     }
 
     calculateScore();
@@ -101,14 +94,22 @@ function calculateScore(){
     if(playerScore >= 5 || computerScore >= 5)
     {
         displayScore(playerScore, computerScore);
-        document.getElementsByTagName('h1')[0].innerText = 'Wanna play again??';
-        document.getElementById('rps-img').style.display = 'block';
         resetGame();
     }
 }
 
 // display the score
 function displayScore(player, cpu){
+    // change header title and display a picture of the game
+    document.getElementsByTagName('h1')[0].innerText = 'Wanna play again??';
+    document.getElementById('rps-img').style.display = 'block';
+
+    // hide choice buttons and round result text
+    // to prevent player from continuing to play
+    document.getElementById('buttons-container').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+
+    // show final score
     let finalScore = '';
 
     if(player > cpu){
@@ -125,21 +126,25 @@ function displayScore(player, cpu){
 
 // reset game once a winner is announced
 function resetGame(){
-    document.getElementById("buttons-container").style.display = 'none';
-    document.getElementById('result').style.display = 'none';
-
     let resetBtn = document.getElementById('reset');
-    resetBtn.style.display = 'initial';
+    resetBtn.style.display = 'block';
 
     resetBtn.addEventListener('click', () => {
-        document.getElementsByTagName('h1')[0].innerText = 'Let\'s play a round of Rock, Paper, Scissors';
+        // set header text back
+        document.getElementsByTagName('h1')[0].innerText = 'Let\'s play Rock, Paper, Scissors';
+        // remove the previous round result
         document.getElementById('result').innerText = '';
+        // set both scores to 0
         document.getElementById('player').innerText = '0';
         document.getElementById('cpu').innerText = '0';
+        // clear the winning message
         document.getElementById('winner').innerText = '';
 
-        document.getElementById("buttons-container").style.display = 'flex';;
+        // unhide the choice buttons and round result message
+        document.getElementById('buttons-container').style.display = 'flex';;
         document.getElementById('result').style.display = 'block';
+
+        // hide game picture and reset button
         document.getElementById('rps-img').style.display = 'none';
         resetBtn.style.display = 'none';
     });

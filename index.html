@@ -11,49 +11,42 @@
 </head>
 
 <body>
-    <div id="container">
-        <header>
-            <h1>Let's play a round of Rock, Paper, Scissors!!</h1>
-        </header>
+    <header>
+        <h1>Let's play Rock, Paper, Scissors!!</h1>
+    </header>
 
-        <div id="buttons-container">
-            <div class="choice">
-                <img src="./images/fist.png" alt="black icon of a fist">
-                <button>Rock</button>
-            </div>
-
-            <div class="choice">
-                <img src="./images/hand.png" alt="black icon of a hand">
-                <button>Paper</button>
-            </div>
-
-            <div class="choice">
-                <img src="./images/v.png" alt="black icon of a hand in v sign">
-                <button>Scissors</button>
-            </div>
+    <div id="buttons-container">
+        <div class="choice">
+            <img src="./images/fist.png" alt="black icon of a fist">
+            <button>Rock</button>
         </div>
 
-        <img id="rps-img" src="./images/rock-paper-scissors.png" alt="black icon of rock-paper-scissors game">
-
-        <p id="result"></p>
-
-        <div id="final-result-container">
-            <div id="score-container">
-                <div class="score">
-                    <p>You:</p>
-                    <p id="player">0</p>
-                </div>
-                <div class="score">
-                    <p>Computer:</p>
-                    <p id="cpu">0</p>
-                </div>
-            </div>
-
-            <p id="winner"></p>
-            <button id="reset">One more time!</button>
+        <div class="choice">
+            <img src="./images/hand.png" alt="black icon of a hand">
+            <button>Paper</button>
         </div>
 
+        <div class="choice">
+            <img src="./images/v.png" alt="black icon of a hand in v sign">
+            <button>Scissors</button>
+        </div>
     </div>
+
+    <img id="rps-img" src="./images/rock-paper-scissors.png" alt="black icon of rock-paper-scissors game">
+
+    <p id="result"></p>
+
+    <div id="score-container">
+        <div class="score">
+            <p>You:<span id="player">0</span></p>
+        </div>
+        <div class="score">
+            <p>Computer:<span id="cpu">0</span></p>
+        </div>
+    </div>
+
+    <p id="winner"></p>
+    <button id="reset">One more time!</button>
 </body>
 
 </html>
