@@ -92,11 +92,6 @@ function calculateScore(){
     else if(currentWinner.includes('lose'))
         computerScore += 1;
 
-    else if(currentWinner.includes('tie')){
-        playerScore += 1;
-        computerScore += 1;
-    }
-
     // display score
     document.getElementById('player').innerText = playerScore;
     document.getElementById('cpu').innerText = computerScore;
